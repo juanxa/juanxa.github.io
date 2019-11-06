@@ -1,4 +1,3 @@
-
 var body = document.querySelector("body");
 var audio = document.querySelector("#audio");
 var button_start_audio = document.querySelector("#button_start_audio");
@@ -354,8 +353,8 @@ function cosineDissimilarity(obj1, obj2) {
     normB += Math.pow( obj2[i], 2 );
   }
 
-  normA = Math.sqrt(mA);
-  normB = Math.sqrt(mB);
+  normA = Math.sqrt(normA);
+  normB = Math.sqrt(normB);
 
   return 1 - ( dot / ( normA * normB ) );
 
@@ -375,8 +374,8 @@ function getAngle(obj1, obj2) {
     normB += Math.pow( obj2[i], 2 );
   }
 
-  normA = Math.sqrt(mA);
-  normB = Math.sqrt(mB);
+  normA = Math.sqrt(normA);
+  normB = Math.sqrt(normB);
 
   var radians = Math.acos( ( dot / ( normA * normB ) ) );
   return radians * (180 / Math.PI); // degrees
@@ -395,7 +394,7 @@ function getAngles() {
 
   // console.log(angles);
 
-  
+
 
 }
 
