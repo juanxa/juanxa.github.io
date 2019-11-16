@@ -53,6 +53,7 @@ var started = false;
 var n = 0;
 
 var drawMode = "sequence";
+var circleMode = "mfcc"
 
 init();
 
@@ -205,6 +206,7 @@ function placeSegmentInSequence(segment) {
 
       updateThreshold( distances, getIndexofMinDistance(distances) );
       getTimeIntervals();
+
 
       break;
 
@@ -454,7 +456,7 @@ function getMidpoints(points) {
   var midpoints = new Array(points.length - 1);
 
   for (var i = 0; i < (midpoints.length); i++) {
-      midpoints[i] = midpoint(points[i].frequencyDomainData, points[i + 1].frequencyDomainData);
+      midpoints[i] = midpoint(points[i].timeDomainData, points[i + 1].timeDomainData);
   }
 
   return midpoints;
@@ -545,7 +547,7 @@ function playSegment(segment) {
 
   if (drawMode == "circle") {
     colorMode(RGB, 255, 255, 255);
-    drawSound(segment, "mfcc");
+    drawSound(segment, circleMode);
   }
 
 
