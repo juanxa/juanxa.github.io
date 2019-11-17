@@ -394,10 +394,6 @@ function getAngles() {
     angles.push(getAngle(sequence[i].mfcc, sequence[i + 1].mfcc));
   }
 
-  // console.log(angles);
-
-
-
 }
 
 
