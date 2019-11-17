@@ -16,9 +16,7 @@ function setup() {
   g = random(50, 150);
   b = random(50, 150);
 
-  circleSize = windowHeight - 20;
-
-
+  circleSize = Math.sqrt(windowHeight * windowHeight + windowWidth * windowWidth);
 
 }
 
@@ -43,12 +41,12 @@ function drawCurrentSegmentColor() {
 
 function drawSequence() {
 
-  var rectWidth = windowWidth / (sequence.length - 1);
+  var rectWidth = windowWidth / sequence.length;
   var rectHeight;
 
   for (var i = 0; i < sequence.length; i++) {
 
-    var x = (i - 1) * rectWidth + (rectWidth / 2);
+    var x = i * rectWidth + (rectWidth / 2);
     var y = windowHeight / 2;
     var hue;
 
@@ -67,31 +65,26 @@ function drawSequence() {
 
 function drawCursor(i) {
 
-  var rectWidth = windowWidth / (sequence.length - 1);
+  var rectWidth = windowWidth / sequence.length;
   var rectHeight;
 
+  var x = i * rectWidth + (rectWidth / 2);
+  var y = windowHeight / 2;
+  var hue;
 
-  if (i > 0) {
+  hue = map(sequence[i].centroid, 0, 3000, 0, 360);
+  rectHeight = map(sequence[i].rms, 0, 6, 0, windowHeight / 2);
 
-    var x = (i - 1) * rectWidth + (rectWidth / 2);
-    var y = windowHeight / 2;
-    var hue;
+  stroke(color(0, 0, 0, 25));
+  fill(color(hue, 100, 100, 100));
+  rect(x, y, rectWidth, rectHeight);
 
-    hue = map(sequence[i - 1].centroid, 0, 3000, 0, 360);
-    rectHeight = map(sequence[i - 1].rms, 0, 6, 0, windowHeight / 2);
+  hue = map(sequence[i].centroid, 0, 3000, 0, 360);
+  rectHeight = map(sequence[i].rms, 0, 6, 0, windowHeight / 2);
 
-    stroke(color(0, 0, 0, 25));
-    fill(color(hue, 100, 100, 100));
-    rect(x - rectWidth, y, rectWidth, rectHeight);
-
-    hue = map(sequence[i].centroid, 0, 3000, 0, 360);
-    rectHeight = map(sequence[i].rms, 0, 6, 0, windowHeight / 2);
-
-    noStroke();
-    fill(color(hue, 50, 100, 75));
-    rect(x, y, rectWidth, rectHeight);
-
-  }
+  noStroke();
+  fill(color(hue, 50, 100, 75));
+  rect(x, y, rectWidth, rectHeight);
 
 }
 
@@ -135,19 +128,19 @@ function drawSpectrum(n) {
 
 }
 
-function drawSound(segment) {
-
-  translate(windowWidth / 2, windowHeight / 2);
-  background(0);
-  stroke(255);
-  beginShape();
-  for (var i = 0; i < segment.mfcc.length / 2; i++) {
-    vertex(segment.mfcc[i], segment.mfcc[i + segment.mfcc.length / 2] );
-  }
-  endShape();
-  translate(-windowWidth / 2, -windowHeight / 2);
-
-}
+// function drawSound(segment) {
+//
+//   translate(windowWidth / 2, windowHeight / 2);
+//   background(0);
+//   stroke(255);
+//   beginShape();
+//   for (var i = 0; i < segment.mfcc.length / 2; i++) {
+//     vertex(segment.mfcc[i], segment.mfcc[i + segment.mfcc.length / 2] );
+//   }
+//   endShape();
+//   translate(-windowWidth / 2, -windowHeight / 2);
+//
+// }
 
 //////////////////////////////////
 
